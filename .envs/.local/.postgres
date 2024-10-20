@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=narvi_task
+POSTGRES_USER=apKLqPrBOueJuKwUKXmsLmrlVinqrPDZ
+POSTGRES_PASSWORD=lPSqWbyf5YeY22EMmICpDtkU16sfMoIot1R4kZ9rEeOFkXR4vHK3qSkz0Rw5dMER
