@@ -7,6 +7,40 @@ Recruitment task @ Narvi
 
 License: MIT
 
+## Usage
+      $ docker compose -f docker-compose.local.yml build
+      $ docker compose -f docker-compose.local.yml up
+
+## Run tests
+      $ docker compose -f docker-compose.local.yml run django pytest
+
+## Test algorithm
+Either run unit tests for group_names.py, use API at `GET /api/reset_folders` or bash into django container and run python file
+
+## API endpoints
+
+To test API:
+1. Go to http://127.0.0.1:8000/api/docs (swagger)
+2. Run `GET /api/reset_folders/` to populate folders/names (also resets after names moves)
+3. Notice data with `GET /api/folders/`
+4. Use `PATCH /api/names/{name}/move_name_into_folder` with `{"folder_name": "<destination_folder_name>"}` as request body to change name's folder
+5. Use `POST /api/folders/` to create Folder
+
+## Follow up questions
+1. How do you productionize this application?
+   As I was using cookiecutter there's already production ready docker containers setup with gunicorn and nginx. 
+   For cloud deploy I'd use Terraform with Infrastracture as a Code repo to deploy with created images in CI/CD pipelines,
+   but it's a rather simple infra as there's only postgresql database and django app.
+2. How do you optimize it to work at a much bigger scale processing millions of words per second?
+   If we expect millions of requests to create and move names into folders then I'd try to scale horizontally with Load Balancers and try not to lock out database.
+   If we expect one big csv file with names then there's an issue with processing big file that could not fit in memory
+   so we'd have to process file in chunks and try to adjust folders on the go rather than trying to find matching prefix in a file.
+   Might also use Apache Kafka to do distributed stream processing
+
+## TODO
+add pre-commit with black, flake8, isort, mypy etc.
+
+
 ## Settings
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).

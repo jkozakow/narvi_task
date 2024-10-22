@@ -21,6 +21,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("narvi_task.users.urls", namespace="users")),
+    path("folders/", include("narvi_task.folders.urls", namespace="folders")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     # ...
